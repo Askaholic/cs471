@@ -44,7 +44,7 @@
         <hr/>
         <h3>PCI Compliance</h3>
         <p>
-          The Payment Card Industry Data Security Standard (PCI DSS) is a security policy that any company storing cardholder data must adhere to. It is very restrictive and too expensive for a small company to implement. Entire document: <a href="https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss">https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss</a>
+          The Payment Card Industry Data Security Standard (PCI DSS) is a security policy that any company storing cardholder data must adhere to. It is very restrictive and too expensive for a small company to implement, which is why it is preferable to use a PCI compliant third party system. Entire document: <a href="https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss">https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss</a>
         </p>
         <h5>Summary</h5>
         <ul>
@@ -110,10 +110,10 @@
         <table class="table table-striped">
           <tr>
             <th></th>
-            <th>Square</th>
-            <th>Stripe</th>
             <th>PayPal</th>
+            <th>Stripe</th>
             <th>Braintree</th>
+            <th>Square</th>
           </tr>
           <tr>
             <td>Setup Fee</td>
@@ -123,9 +123,33 @@
           </tr>
           <tr>
             <td>Cost per Transaction</td>
+            <td>2.9% + 30c</td>
+            <td>2.9% + 30c</td>
+            <td>2.9% + 30c</td>
+            <td>2.9% + 30c</td>
+          </tr>
+          <tr>
+            <td>American Express Fee</td>
+            <td>3.5%</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>International Fee</td>
+            <td>3.9% + fixed based on currency</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Micropayments ( < $10)</td>
+            <td>0.5% + 5c</td>
+            <td>2.9% + 30c</td>
+          </tr>
+          <tr>
+            <td>Recurring Billing</td>
           </tr>
           <tr>
             <td>Chargeback</td>
+            <td>$20</td>
+            <td>$15</td>
           </tr>
           <tr>
             <td>Currency Conversion Fee</td>
@@ -135,6 +159,14 @@
           </tr>
           <tr>
             <td>Data Migration</td>
+          </tr>
+          <tr>
+            <td>Easy to use API</td>
+          </tr>
+          <tr>
+            <td>Integrated Checkout</td>
+            <td>Yes, with pro ($30/month)</td>
+            <td>Yes, requires API</td>
           </tr>
         </table>
         <hr/>
@@ -147,8 +179,10 @@
           https://www.braintreepayments.com/
           https://squareup.com/
           https://stripe.com/
+          https://www.paypal.com/us/webapps/mpp/merchant-fees
           http://www.onlinetech.com/resources/references/what-is-pci-compliance
           https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss
+          https://www.getcontrol.co/blog/paypal-vs-stripe-are-two-payment-processors-better-than-one/
         </div>
       </div>
     </div>
