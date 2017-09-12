@@ -37,7 +37,7 @@
         <h1>Credit Card Processing Options for a Small Webstore</h1>
         <h3>PCI Compliance</h3>
         <p>
-          The Payment Card Industry Data Security Standard (PCI DSS) is a security policy that any company storing cardholder data must implement. It is very restrictive and too expensive for a small company to implement. Entire document: <a href="https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss">https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss</a>
+          The Payment Card Industry Data Security Standard (PCI DSS) is a security policy that any company storing cardholder data must adhere to. It is very restrictive and too expensive for a small company to implement. Entire document: <a href="https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss">https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss</a>
         </p>
         <h5>Summary</h5>
         <ul>
@@ -45,17 +45,23 @@
           <ol>
             <li>
               <b>Install and maintain a firewall</b>
-              <p>
-                The company must secure every connection to the internet with a firewall, including firewalls on every device used by employees.
-              </p>
+              <p>The company must secure every connection to the internet with a firewall, including firewalls on any device used by employees.</p>
             </li>
             <li>
               <b>Do not use vendor-supplied defaults</b>
-              <p>
-                This means setting up and maintaining secure passwords, and keeping security configurations relevant for the companies system.
-              </p>
+              <p>This means setting up and maintaining secure passwords, and keeping security configurations relevant for the company's system.</p>
             </li>
           </ol>
+          <li>Protect Cardholder Data</li>
+          <ol>
+            <li><b>Protect stored data</b>
+              <p>Use encryption along with physical seuciry measures such as locked cabinets and doors. Restrict access to anyone who does not need the data.</p>
+            </li>
+            <li><b>Encrypt transmission of data across public networks</b>
+              <p>Always encrypt network traffic and never store authentication data even if it is encrypted.</p>
+            </li>
+          </ol>
+          <li>Maintain a Vulnerability Management Program</li>
         </ul>
         <h3>Comparison</h3>
         <table class="table table-striped">
