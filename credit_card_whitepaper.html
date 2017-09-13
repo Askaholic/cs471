@@ -99,12 +99,26 @@
           padding: 5px 10px;
           border: 1px solid #e1e1e1;
       }
-    </style>
-    <style title="logos">
-      .logo {
-        height: 50px;
-        width: 100px;
-      }
+        .logo {
+          height: 50px;
+          width: 100px;
+        }
+        .paypal-logo {
+          background: transparent url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PayPal_logo.svg/2000px-PayPal_logo.svg.png) center no-repeat;
+          background-size: contain;
+        }
+        .stripe-logo {
+          background: transparent url(https://stripe.com/img/about/logos/logos/blue.png) center no-repeat;
+          background-size: contain;
+        }
+        .braintree-logo {
+          background: transparent url(https://www.braintreepayments.com/images/bt-logo-black-2dc4ba9a.png) center no-repeat;
+          background-size: contain;
+        }
+        .square-logo {
+          background: transparent url(http://cbsolutions.org/wp-content/uploads/2016/01/square-logo.png) center no-repeat;
+          background-size: contain;
+        }
     </style>
   </head>
   <body>
@@ -192,10 +206,10 @@
             </li>
           </ol>
         </ul>
-        <hr/>
+        <p style="page-break-before: always"></p><br/>
         <h3>Third Party Gateway Options</h3>
         <hr/>
-        <h5>PayPal</h5>
+        <div class="logo paypal-logo"></div>
         <div class="row">
           <div class="col-sm-6">
             <label>Pros:</label>
@@ -217,7 +231,7 @@
           </div>
         </div>
         <hr/>
-        <h5>Stripe</h5>
+        <div class="logo stripe-logo"></div>
         <div class="row">
           <div class="col-sm-6">
             Pros:
@@ -238,7 +252,7 @@
           </div>
         </div>
         <hr/>
-        <h5>Braintree</h5>
+        <div class="logo braintree-logo"></div>
         <div class="row">
           <div class="col-sm-6">
             <label>Pros:</label>
@@ -258,7 +272,7 @@
           </div>
         </div>
         <hr/>
-        <h5>Square</h5>
+        <div class="logo square-logo"></div>
         <div class="row">
           <div class="col-sm-6">
             <label>Pros:</label>
@@ -282,10 +296,10 @@
         <table class="table table-striped">
           <tr>
             <th></th>
-            <th>PayPal</th>
-            <th>Stripe</th>
-            <th>Braintree</th>
-            <th>Square E-Commerce</th>
+            <th><div class="logo paypal-logo"></div></th>
+            <th><div class="logo stripe-logo"></div></th>
+            <th><div class="logo braintree-logo"></div></th>
+            <th><div class="logo square-logo"></div></th>
           </tr>
           <tr>
             <td>Setup Fee</td>
@@ -465,10 +479,24 @@
               }
           });
         </script>
+        <br/>
         <p>
           The smaller your transactions are (under $10) the more beneficial it will be to go with PayPal. At an average transaction size of $5 you will already be saving almost $3,000 (that's 3% of your revenue!) per year by picking PayPal over any of the competitors. At this point even if you are a subscription based company (say $5/month subscription) the $120/year recurring payment fee is absolutely worth paying.
         </p>
+        <label>Small transactions:</label>
+        <h3>PayPal</h3>
+        <p>
+          PayPal will save you a lot of money if you process mostly microtransactions
+        </p>
+        <label>Otherwise:</label>
+        <h3>Stripe</h3>
+        <p>
+          Stripe has fewer fees and a superior API making website checkout integration easy
+        </p>
         <h5>Large Business ($1M/year)</h5>
+        <p>
+
+        </p>
         <hr/>
         <h3>Sources</h3>
         <div title="links">
