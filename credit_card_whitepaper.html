@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style title="main-style">
@@ -27,14 +28,82 @@
       .fa-times {
         color: #bc0000;
       }
+      .graph-container, #tooltip, .graph-info a {
+          background: #ffffff;
+          background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f9f9f9));
+          background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+          background: -o-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+          background: -ms-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+          background: linear-gradient(to bottom, #ffffff 0%,#f9f9f9 100%);
+
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+      }
+      .graph-container {
+          position: relative;
+          width: 800px;
+          height: 400px;
+          padding: 20px;
+
+          -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+          -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+          box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+      }
+      .graph-container > div {
+          position: absolute;
+          width: inherit;
+          height: inherit;
+          top: 10px;
+          left: 25px;
+      }
+      .graph-info {
+          width: 590px;
+          margin-bottom: 10px;
+      }
+      .graph-info a {
+          position: relative;
+          display: inline-block;
+          float: left;
+          height: 20px;
+          padding: 7px 10px 5px 30px;
+          margin-right: 10px;
+          text-decoration: none;
+          cursor: default;
+      }
+      .graph-info a:before {
+          position: absolute;
+          display: block;
+          content: '';
+          width: 8px;
+          height: 8px;
+          top: 13px;
+          left: 13px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+      }
+
+      .graph-info .other:before { background: #71c73e; }
+      .graph-info .paypal:before { background: #77b7c5; }
+      .graph-info:before, .graph-info:after,
+      .graph-container:before, .graph-container:after {
+          content: '';
+          display: block;
+          clear: both;
+      }
+      #tooltip {
+          position: absolute;
+          display: none;
+          padding: 5px 10px;
+          border: 1px solid #e1e1e1;
+      }
     </style>
     <style title="logos">
       .logo {
         height: 50px;
         width: 100px;
-      }
-      .active-network {
-        background-color: #999;
       }
     </style>
   </head>
@@ -44,7 +113,7 @@
         <div>
           <p>
             Rohan Weeden<br/>
-            September 12, 2017<br/>
+            September 13, 2017<br/>
             Whitepaper
           </p>
         </div>
@@ -316,19 +385,88 @@
           When it comes to pricing, these service are almost identical. Therefore factors like website integration, fraud protection, ease of exporting customer data, and quality of the API will play a larger role in deciding which one to choose.
         </p>
         <h5>Small Business ($100k/year)</h5>
+        <center>
+          <h6>Yearly fee VS Transaction size</h6>
+        </center>
+        <div id="graph-wrapper">
+          <div class="graph-info">
+            <a href="javascript:void(0)" class="paypal">PayPal</a>
+            <a href="javascript:void(0)" class="other">Standard Rate</a>
+          </div>
+          <div class="graph-container">
+            <div id="graph-line"></div>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function() {
+            var paypalData = []
+            var otherData = []
+            for (var i = 1; i < 15; i++) {
+              var reg = [i, 100000 * 0.029 + 0.30 * (100000 / i)]
+              if (i <= 10) {
+                paypalData.push([i, 100000 * 0.05 + 0.05 * (100000 / i)])
+              }
+              else {
+                paypalData.push(reg)
+              }
+              otherData.push(reg)
+            }
+            var graphData = [
+              {
+                data: otherData,
+                color: '#71c73e',
+                points: { radius: 2, fillColor: '#71c73e' }
+              }, {
+                data: paypalData,
+                color: '#77b7c5',
+                points: { radius: 2, fillColor: '#77b7c5' }
+              }
+            ]
+            $.plot($('#graph-line'), graphData, {
+                series: {
+                    points: {
+                        show: true,
+                        radius: 5
+                    },
+                    lines: {
+                        show: true
+                    },
+                    shadowSize: 0
+                },
+                grid: {
+                    color: '#646464',
+                    borderColor: 'transparent',
+                    borderWidth: 20,
+                    hoverable: true
+                }
+            });
+          })
+          function showTooltip(x, y, contents) {
+              $('<div id="tooltip">' + contents + '</div>').css({
+                  top: y - 16,
+                  left: x + 20
+              }).appendTo('body').fadeIn();
+          }
+
+          var previousPoint = null;
+
+          $('#graph-line').bind('plothover', function (event, pos, item) {
+              if (item) {
+                  if (previousPoint != item.dataIndex) {
+                      previousPoint = item.dataIndex;
+                      $('#tooltip').remove();
+                      var x = item.datapoint[0],
+                          y = item.datapoint[1];
+                          showTooltip(item.pageX, item.pageY, '$' + y.toFixed(2) + ' @ $' + x.toFixed(2) + '/transaction');
+                  }
+              } else {
+                  $('#tooltip').remove();
+                  previousPoint = null;
+              }
+          });
+        </script>
         <p>
-          <strong>** DRAFT NOTE ** A graph could be very useful here</strong><br/>
-          20,000 transactions @ $5 each (PayPal Micro)<br/>
-          (5% * 100,000) + ($0.05 * 20,000) = $5,000 + $1000 = $6,000<br/>
-          20,000 transactions @ $5 each (Flat Rate)<br/>
-          (2.9% * 100,000) + ($0.30 * 20,000) = $2,900 + $6000 = $8,900<br/>
-          10,000 transactions @ $10 each (PayPal Micro)<br/>
-          (5% * 100,000) + ($0.05 * 10,000) = $5,000 + $500 = $5,500<br/>
-          10,000 transactions @ $10 each (Flat Rate)<br/>
-          (2.9% * 100,000) + ($0.30 * 10,000) = $2,900 + $3000 = $5,900<br/>
-          1,000 transactions @ $100 each (Flat Rate)<br/>
-          (2.9% * 100,000) + ($0.30 * 1,000) = $2,900 + $300 = $3,200<br/>
-          The smaller your transactions are (under $10) the more beneficial it will be to go with PayPall. At an average transaction size of $5 you will already be saving almost $3,000 (that's 3% of your revenue!) per year by picking PayPal over any of the competitors. At this point even if you are a subscription based company (say $5/month subscription) the $120/year recurring payment fee is absolutely worth paying.
+          The smaller your transactions are (under $10) the more beneficial it will be to go with PayPal. At an average transaction size of $5 you will already be saving almost $3,000 (that's 3% of your revenue!) per year by picking PayPal over any of the competitors. At this point even if you are a subscription based company (say $5/month subscription) the $120/year recurring payment fee is absolutely worth paying.
         </p>
         <h5>Large Business ($1M/year)</h5>
         <hr/>
