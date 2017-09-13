@@ -39,8 +39,8 @@
     </style>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="centered-wrapper">
+    <div class="centered-wrapper">
+      <div class="container-fluid">
         <div>
           <p>
             Rohan Weeden<br/>
@@ -117,70 +117,87 @@
         <h3>Comparison</h3>
         <hr/>
         <h5>PayPal</h5>
-        <p>
-          Pros:
-          <ul>
-            <li>Cheap for transactions < $10</li>
-            <li>Widely trusted</li>
-            <li>Great fraud protection</li>
-            <li>Extremely fast setup</li>
-          </ul>
-          Cons:
-          <ul>
-            <li>Poor API documentation</li>
-            <li>No Apple Pay support</li>
-            <li>Will not export customer data if you decide to switch</li>
-            <li>Additional fees for international cards and American Express</li>
-          </ul>
-        </p>
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Pros:</label>
+            <ul>
+              <li>Cheap for transactions < $10</li>
+              <li>Widely trusted</li>
+              <li>Great fraud protection</li>
+              <li>Extremely fast setup</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <label>Cons:</label>
+            <ul>
+              <li>Poor API documentation</li>
+              <li>No Apple Pay support</li>
+              <li>Will not export customer data if you decide to switch</li>
+              <li>Additional fees for international cards and American Express</li>
+            </ul>
+          </div>
+        </div>
         <hr/>
         <h5>Stripe</h5>
-        <p>
-          Pros:
-          <ul>
-            <li>All features included</li>
-            <li>Great API documentation</li>
-            <li>Integrates seamlessly into website</li>
-            <li>Will help you export customer data if you decide to switch</li>
-          </ul>
-          Cons:
-          <ul>
-            <li>Slower setup</li>
-            <li>Costly for transactions < $10</li>
-            <li>No customer support over the phone</li>
-          </ul>
-        </p>
+        <div class="row">
+          <div class="col-sm-6">
+            Pros:
+            <ul>
+              <li>All features included</li>
+              <li>Great API documentation</li>
+              <li>Integrates seamlessly into website</li>
+              <li>Will help you export customer data if you decide to switch</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <label>Cons:</label>
+            <ul>
+              <li>Slower setup</li>
+              <li>Costly for transactions < $10</li>
+              <li>No customer support over the phone</li>
+            </ul>
+          </div>
+        </div>
         <hr/>
         <h5>Braintree</h5>
-        <p>
-          Pros:
-          <ul>
-            <li>Supports Apple Pay, Android Pay, PayPal, and Venmo</li>
-            <li>Fast setup</li>
-            <li>Good API documentation</li>
-            <li>Will help you export customer data if you decide to switch</li>
-          </ul>
-          Cons:
-          <ul>
-            <li>Additional fees for international cards and American Express</li>
-            <li>Costly for transactions < $10</li>
-          </ul>
-        </p>
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Pros:</label>
+            <ul>
+              <li>Supports Apple Pay, Android Pay, PayPal, and Venmo</li>
+              <li>Fast setup</li>
+              <li>Good API documentation</li>
+              <li>Will help you export customer data if you decide to switch</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <label>Cons:</label>
+            <ul>
+              <li>Additional fees for international cards and American Express</li>
+              <li>Costly for transactions < $10</li>
+            </ul>
+          </div>
+        </div>
         <hr/>
         <h5>Square</h5>
-        <p>
-          Pros:
-          <ul>
-            <li>Great support for in-store transactions</li>
-            <li>Fast setup</li>
-            <li>Good API documentation</li>
-          </ul>
-          Cons:
-          <ul>
-            <li>May lag behind in online transactions</li>
-            <li>No evidence that they will export customer data if you decide to switch</li>
-          </ul>
-        </p>
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Pros:</label>
+            <ul>
+              <li>Great support for in-store transactions</li>
+              <li>Fast setup</li>
+              <li>Good API documentation</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <label>Cons:</label>
+            <ul>
+              <li>May lag behind in online transactions</li>
+              <li>No evidence that they will export customer data if you decide to switch</li>
+            </ul>
+          </div>
+        </div>
+        <hr/>
         <table class="table table-striped">
           <tr>
             <th></th>
@@ -284,7 +301,7 @@
         <hr/>
         <h3>Recommended Option</h3>
         <p>
-          When it comes to pricing, these service are almost identical. Therefore factors like website integration, fraud protection, ease of exporting customer data, and the quality of the API will play a larger role in deciding which one to choose.
+          When it comes to pricing, these service are almost identical. Therefore factors like website integration, fraud protection, ease of exporting customer data, and quality of the API will play a larger role in deciding which one to choose.
         </p>
         <h5>Small Business ($100k/year)</h5>
         <h5>Large Business ($1M/year)</h5>
