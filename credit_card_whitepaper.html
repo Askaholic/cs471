@@ -4,21 +4,540 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Card Processing</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style title="main-style">
+      html {
+        font-family: 'Open Sans', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Roboto', sans-serif;
+      }
+      p, table, div {
+        page-break-inside: avoid;
+      }
       .centered-wrapper {
         margin-right: auto;
         margin-left: auto;
-        max-width: 800;
+        max-width: 800px;
+      }
+      .fa-check {
+        color: #00b211;
+      }
+      .fa-times {
+        color: #bc0000;
+      }
+      .graph-container, #tooltip {
+          background: #ffffff;
+          background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f9f9f9));
+          background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+          background: -o-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+          background: -ms-linear-gradient(top, #ffffff 0%,#f9f9f9 100%);
+          background: linear-gradient(to bottom, #ffffff 0%,#f9f9f9 100%);
+
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+      }
+      .graph-container {
+          position: relative;
+          height: 400px;
+
+          -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+          -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+          box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+      }
+      .graph-container > div {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+      }
+      .graph-info {
+          margin-bottom: 10px;
+      }
+      .graph-info a {
+          position: relative;
+          display: inline-block;
+          float: left;
+          height: 20px;
+          padding: 7px 10px 5px 30px;
+          margin-right: 10px;
+          text-decoration: none;
+          cursor: default;
+      }
+      .graph-info a:before {
+          position: absolute;
+          display: block;
+          content: '';
+          width: 8px;
+          height: 8px;
+          top: 13px;
+          left: 13px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+      }
+
+      .graph-info .other:before { background: #71c73e; }
+      .graph-info .paypal:before { background: #77b7c5; }
+      .graph-info:before, .graph-info:after,
+      .graph-container:before, .graph-container:after {
+          content: '';
+          display: block;
+          clear: both;
+      }
+      #tooltip {
+          position: absolute;
+          display: none;
+          padding: 5px 10px;
+          border: 1px solid #e1e1e1;
+      }
+      .logo {
+        height: 50px;
+        width: 100px;
+      }
+      .paypal-logo {
+        background: transparent url(images/paypal_logo.svg) center no-repeat;
+        background-size: contain;
+      }
+      .stripe-logo {
+        background: transparent url(images/stripe_logo.svg) center no-repeat;
+        background-size: contain;
+      }
+      .braintree-logo {
+        background: transparent url(images/braintree_logo.png) center no-repeat;
+        background-size: contain;
+      }
+      .square-logo {
+        background: transparent url(images/square_logo.svg) center no-repeat;
+        background-size: contain;
       }
     </style>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="centered-wrapper">
+    <div class="centered-wrapper">
+      <div class="container-fluid">
+        <div>
+          <p>
+            Rohan Weeden<br/>
+            September 13, 2017<br/>
+            Whitepaper
+          </p>
+        </div>
         <h1>Credit Card Processing Options for a Small Webstore</h1>
+        <hr/>
+        <p>
+          Allowing customers to pay online is a much trickier problem than it may seem at first. You will need:
+          <ul>
+            <li>Merchant bank account</li>
+            <li>Gateway for transactions</li>
+            <li>Full PCI Compliance</li>
+          </ul>
+          When starting a business it is often most cost effective to pay for a service like PayPal to do the processing for you. But what other options are there? Keep reading to find out...
+        </p>
+        <hr/>
+        <h3>PCI Compliance</h3>
+        <p>
+          The Payment Card Industry Data Security Standard (PCI DSS) is a security policy that any company storing cardholder data must adhere to. Entire document: <a href="https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss">https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss</a>
+        </p>
+        <h5>Summary</h5>
+        <ul>
+          <li>Build and Maintain a Secure Network and Systems</li>
+          <ol>
+            <li>
+              <b>Install and maintain a firewall</b>
+              <p>The company must secure every connection to the internet with a firewall, including firewalls on any device used by employees.</p>
+            </li>
+            <li>
+              <b>Do not use vendor-supplied defaults</b>
+              <p>This means setting up and maintaining secure passwords, and keeping security configurations relevant for the company's system.</p>
+            </li>
+          </ol>
+          <li>Protect Cardholder Data</li>
+          <ol>
+            <li><b>Protect stored data</b>
+              <p>Use encryption along with physical seuciry measures such as locked cabinets and doors. Restrict access to anyone who does not need the data.</p>
+            </li>
+            <li><b>Encrypt transmission of data across public networks</b>
+              <p>Always encrypt network traffic and never store authentication data even if it is encrypted.</p>
+            </li>
+          </ol>
+          <li>Maintain a Vulnerability Management Program</li>
+          <ol>
+            <li><b>Use and regularly update anti-virus software</b>
+              <p>Ensure that all systems commonly affected by malware are running up to date anti-virus software.</p>
+            </li>
+            <li><b>Develop and maintain secure systems</b>
+              <p>Test systems for security holes and be ready to patch vulnerabilities as they are discovered.</p>
+            </li>
+          </ol>
+          <li>Implement Strong Access Control Measures</li>
+          <ol>
+            <li><b>Restrict access to data by business need to know</b>
+              <p>Use the principle of least privilege to reduce risk of a data breach.</p>
+            </li>
+            <li><b>Identify and authenticate access to system components</b>
+              <p>Give every user a unique ID and require strong passwords that are changed every 90 days, and use multi-factor authentication. Remove all user accounts for terminated employees.</p>
+            </li>
+            <li><b>Restrict physical access to data</b>
+              <p>Implement access controls and have video cameras covering access points. Clearly identify and record all visitors.</p>
+            </li>
+          </ol>
+          <li>Regularly Monitor and Test Networks</li>
+          <ol>
+            <li><b>Track and monitor all access to network resources and data</b>
+              <p>Log user activity to help identify the culprit in case of a data breach.</p>
+            </li>
+            <li><b>Regularly test security systems</b>
+              <p>Test for unauthorized wireless access points and have an incident response procedure when any are found. Perform quarterly network vulnerability scans.</p>
+            </li>
+          </ol>
+          <li>Maintain an Information Security Policy</li>
+          <ol>
+            <li><b>Maintain a policy that addresses information security for all personnel</b>
+              <p>This sets the tone for the company and emphasizes to staff what is expected of them.</p>
+            </li>
+          </ol>
+        </ul>
+        <div title="Paypal Pros/Cons">
+          <h3>Third Party Gateway Options</h3>
+          <hr/>
+          <div class="logo paypal-logo"></div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Pros:</label>
+              <ul>
+                <li>Cheap for transactions < $10</li>
+                <li>Widely trusted</li>
+                <li>Great fraud protection</li>
+                <li>Extremely fast setup</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <label>Cons:</label>
+              <ul>
+                <li>Poor API documentation</li>
+                <li>No Apple Pay support</li>
+                <li>Will not export customer data if you decide to switch</li>
+                <li>Additional fees for international cards and American Express</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div title="Stripe Pros/Cons">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="logo stripe-logo"></div>
+              Pros:
+              <ul>
+                <li>All features included</li>
+                <li>Great API documentation</li>
+                <li>Integrates seamlessly into website</li>
+                <li>Will help you export customer data if you decide to switch</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <label>Cons:</label>
+              <ul>
+                <li>Slower setup</li>
+                <li>Costly for transactions < $10</li>
+                <li>No customer support over the phone</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div title="Braintree Pros/Cons">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="logo braintree-logo"></div>
+              <label>Pros:</label>
+              <ul>
+                <li>Supports Apple Pay, Android Pay, PayPal, and Venmo</li>
+                <li>Fast setup</li>
+                <li>Good API documentation</li>
+                <li>Will help you export customer data if you decide to switch</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <label>Cons:</label>
+              <ul>
+                <li>Additional fees for international cards and American Express</li>
+                <li>Costly for transactions < $10</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div title="Square Pros/Cons">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="logo square-logo"></div>
+              <label>Pros:</label>
+              <ul>
+                <li>Great support for in-store transactions</li>
+                <li>Fast setup</li>
+                <li>Good API documentation</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <label>Cons:</label>
+              <ul>
+                <li>May lag behind in online transactions</li>
+                <li>No evidence that they will export customer data if you decide to switch</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p>
+          While PayPal has been trusted in this industry for many years, it has been somewhat slow to adapt to modern trends. There are still a lot of fees for specific types of transactions, and you need to purchase a premium subscription to unlock all of the features. PayPal has also been behind in its API and API Documentation, and has been scrambling to catch up with Stripe. Here are some of the details:
+        </p>
+        <table class="table table-striped" style="page-break-inside: auto">
+          <tr>
+            <th></th>
+            <th><div class="logo paypal-logo"></div></th>
+            <th><div class="logo stripe-logo"></div></th>
+            <th><div class="logo braintree-logo"></div></th>
+            <th><div class="logo square-logo"></div></th>
+          </tr>
+          <tr>
+            <td>Setup Fee</td>
+            <td><i class="fa fa-check"></i> None</td>
+            <td><i class="fa fa-check"></i> None</td>
+            <td><i class="fa fa-check"></i> None</td>
+            <td><i class="fa fa-check"></i> None</td>
+          </tr>
+          <tr>
+            <td>Monthly Fee</td>
+            <td><i class="fa fa-check"></i> None ($30 for Pro)</td>
+            <td><i class="fa fa-check"></i> None</td>
+            <td><i class="fa fa-check"></i> None</td>
+            <td><i class="fa fa-check"></i> None</td>
+          </tr>
+          <tr>
+            <td>Cost per Transaction</td>
+            <td><i class="fa fa-check"></i>&nbsp;2.9%&nbsp;+&nbsp;30c</td>
+            <td><i class="fa fa-check"></i>&nbsp;2.9%&nbsp;+&nbsp;30c</td>
+            <td><i class="fa fa-check"></i>&nbsp;2.9%&nbsp;+&nbsp;30c</td>
+            <td><i class="fa fa-check"></i>&nbsp;2.9%&nbsp;+&nbsp;30c</td>
+          </tr>
+          <tr>
+            <td>American Express Fee</td>
+            <td><i class="fa fa-times"></i> 3.5%</td>
+            <td><i class="fa fa-check"></i> None</td>
+            <td><i class="fa fa-times"></i> $0.15</td>
+            <td><i class="fa fa-check"></i> None</td>
+          </tr>
+          <tr>
+            <td>International Fee</td>
+            <td><i class="fa fa-times"></i> 3.9% + fixed</td>
+            <td><i class="fa fa-check"></i> None</td>
+            <td><i class="fa fa-times"></i> 3.9%</td>
+            <td><i class="fa fa-check"></i> None</td>
+          </tr>
+          <tr>
+            <td>Micropayments ( < $10)</td>
+            <td><i class="fa fa-check"></i> 5.0% + 5c</td>
+            <td><i class="fa fa-times"></i> 2.9% + 30c</td>
+            <td><i class="fa fa-times"></i> 2.9% + 30c</td>
+            <td><i class="fa fa-times"></i> 2.9% + 30c</td>
+          </tr>
+          <tr>
+            <td>Recurring Billing</td>
+            <td><i class="fa fa-times"></i> $10/month</td>
+            <td><i class="fa fa-check"></i> Included</td>
+            <td><i class="fa fa-check"></i> Included</td>
+            <td><i class="fa fa-check"></i> Included</td>
+          </tr>
+          <tr>
+            <td>Chargeback Fee</td>
+            <td><i class="fa fa-times"></i> $20</td>
+            <td><i class="fa fa-times"></i> $15</td>
+            <td><i class="fa fa-times"></i> $15</td>
+            <td><i class="fa fa-check"></i> None</td>
+          </tr>
+          <tr>
+            <td>Fraud Protection</td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+          </tr>
+          <tr>
+            <td>Data Migration</td>
+            <td><i class="fa fa-times"></i></td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-times"></i></td>
+          </tr>
+          <tr>
+            <td>Easy to use API</td>
+            <td><i class="fa fa-times"></i> In Progress</td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+          </tr>
+          <tr>
+            <td>Embedded Into Website</td>
+            <td><i class="fa fa-check"></i> With pro ($30/month)</td>
+            <td><i class="fa fa-check"></i> Requires API</td>
+            <td><i class="fa fa-check"></i> Drop-In or Custom</td>
+            <td><i class="fa fa-check"></i> Requires API</td>
+          </tr>
+          <tr>
+            <td>Apple Pay</td>
+            <td><i class="fa fa-times"></i></td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-check"></i></td>
+          </tr>
+        </table>
+        <hr/>
+        <h3>Recommended Option</h3>
+        <p style="page-break-inside: avoid">
+          When it comes to pricing, these service are almost identical. Therefore factors like website integration, fraud protection, ease of exporting customer data, and quality of the API will play a larger role in deciding which one to choose.
+        </p>
+        <h5>Small Business ($100k/year)</h5>
+        <center>
+          <h6>Yearly fee VS Transaction size</h6>
+        </center>
+        <div id="graph-wrapper">
+          <div class="graph-info">
+            <a href="javascript:void(0)" class="paypal">PayPal</a>
+            <a href="javascript:void(0)" class="other">Standard Rate</a>
+          </div>
+          <div class="graph-container">
+            <div id="graph-line"></div>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function() {
+            var paypalData = []
+            var otherData = []
+            for (var i = 1; i < 15; i++) {
+              var reg = [i, 100000 * 0.029 + 0.30 * (100000 / i)]
+              if (i <= 10) {
+                paypalData.push([i, 100000 * 0.05 + 0.05 * (100000 / i)])
+              }
+              else {
+                paypalData.push(reg)
+              }
+              otherData.push(reg)
+            }
+            var graphData = [
+              {
+                data: otherData,
+                color: '#71c73e',
+                points: { radius: 2, fillColor: '#71c73e' }
+              }, {
+                data: paypalData,
+                color: '#77b7c5',
+                points: { radius: 2, fillColor: '#77b7c5' }
+              }
+            ]
+            plot = $.plot($('#graph-line'), graphData, {
+                series: {
+                    points: {
+                        show: true,
+                        radius: 5
+                    },
+                    lines: {
+                        show: true
+                    },
+                    shadowSize: 0
+                },
+                grid: {
+                    color: '#646464',
+                    borderColor: 'transparent',
+                    borderWidth: 20,
+                    hoverable: true
+                }
+            });
+          })
+          $(window).resize(function() {
+            plot.resize()
+            plot.setupGrid()
+            plot.draw()
+          })
+          function showTooltip(x, y, contents) {
+              $('<div id="tooltip">' + contents + '</div>').css({
+                  top: y - 16,
+                  left: x + 20
+              }).appendTo('body').fadeIn();
+          }
+
+          var previousPoint = null;
+
+          $('#graph-line').bind('plothover', function (event, pos, item) {
+              if (item) {
+                  if (previousPoint != item.dataIndex) {
+                      previousPoint = item.dataIndex;
+                      $('#tooltip').remove();
+                      var x = item.datapoint[0],
+                          y = item.datapoint[1];
+                          showTooltip(item.pageX, item.pageY, '$' + y.toFixed(2) + ' @ $' + x.toFixed(2) + '/transaction');
+                  }
+              } else {
+                  $('#tooltip').remove();
+                  previousPoint = null;
+              }
+          });
+        </script>
+        <br/>
+        <p style="page-break-inside: avoid">
+          The smaller your transactions are (under $10) the more beneficial it will be to go with PayPal. At an average transaction size of $5 you will already be saving almost $3,000 (that's 3% of your revenue!) per year by picking PayPal over any of the competitors. At this point even if you are a subscription based company (say $5/month subscription) the $120/year recurring payment fee is absolutely worth paying.
+        </p>
+        <table class="table">
+          <tr>
+            <th>Small Transactions</th>
+            <th>Large Transactions</th>
+          </tr>
+          <tr>
+            <td><div class="logo paypal-logo"></div></td>
+            <td><div class="logo stripe-logo"></div></td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                Will save you a lot of money if you process mostly microtransactions
+              </p>
+            </td>
+            <td>
+              <p>
+                Fewer fees and a superior API making website checkout integration easy
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <h5>Large Business ($1M/year)</h5>
+        <p style="page-break-inside: avoid">
+          For a large business it may be worth considering the cost of becoming PCI compliant and everything in-house. Emperical evidence suggests that for a business of this size it could cost $80,000 to $100,000 to become compliant. However, this is an issue for another whitepaper.
+          <br/>
+          The best option would still be the same as for a small business.
+        </p>
+        <hr/>
+        <h3>Sources</h3>
+        <div title="links">
+          <ul>
+            <li><a href="https://www.braintreepayments.com/">https://www.braintreepayments.com/</a></li>
+            <li><a href="https://squareup.com/">https://squareup.com/</a></li>
+            <li><a href="https://stripe.com/">https://stripe.com/</a></li>
+            <li><a href="https://www.paypal.com/us/webapps/mpp/merchant-fees">https://www.paypal.com/us/webapps/mpp/merchant-fees</a></li>
+            <li><a href="http://www.onlinetech.com/resources/references/what-is-pci-compliance">http://www.onlinetech.com/resources/references/what-is-pci-compliance</a></li>
+            <li><a href="https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss">https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss</a></li>
+            <li><a href="https://www.getcontrol.co/blog/paypal-vs-stripe-are-two-payment-processors-better-than-one/">https://www.getcontrol.co/blog/paypal-vs-stripe-are-two-payment-processors-better-than-one/</a></li>
+            <li><a href="http://redwoodinternet.com/interchange-vs-square.php">http://redwoodinternet.com/interchange-vs-square.php</a></li>
+            <li><a href="https://www.sitepoint.com/stripe-vs-braintree-the-ultimate-guide/">https://www.sitepoint.com/stripe-vs-braintree-the-ultimate-guide/</a></li>
+            <li><a href="https://www.braintreepayments.com/blog/what-does-it-cost-to-become-pci-compliant/">https://www.braintreepayments.com/blog/what-does-it-cost-to-become-pci-compliant/</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>
