@@ -90,20 +90,20 @@
         <p>
           Conventions exist because they work well for delivering content in a
           way that the user will understand. Not only will following them save
-          you time spent re-inventing the wheel, but users will also be confortable
-          navigating your site because they are already familiar with the
+          you time spent re-inventing the wheel, but users will also be comfortable
+          navigating your site because they are already <b>familiar</b> with the
           conventions as they've seen them on other sites.
         </p>
         <h3>Clarity trumps consistency</h3>
         <p>
-          If you can make something significantly clearer by slightly decreasing
+          If you can make something <i>significantly</i> clearer by <i>slightly</i> decreasing
           the consistency of the site, do it.
         </p>
         <h3>Visual hierarchies</h3>
         <p>
           Use visual queues to convey meta-information about the content of the
-          site. Related topics should be grouped together, either by putting
-          them close together, or even enclosing them in the same box. Think of
+          site. Related topics should be grouped, either by putting them close
+          <b>together</b>, or even by enclosing them in the same <b>box</b>. Think of
           a newspaper and how articles, their titles, and related images are
           visually close together.
         </p>
@@ -113,7 +113,7 @@
           </div>
           <div class="col-md-6">
             <h4>Headings</h4>
-            <p>The relative size of elements should also be used to indicate their
+            <p>The relative <b>size</b> of elements should also be used to indicate their
               importance. It is crucial that heading sizes are easy to distinguish
               with a quick glance at the page.
             </p>
@@ -131,9 +131,30 @@
         </div>
         <h3>Make it obvious what's clickable</h3>
         <p>
-          
+          Much of a users time is spent searching for the next thing to click,
+          so it's important to make it obvious what's <a class="clickable" href="#"> clickable</a>
+          and what isn't. Clickable things should be marked with a different
+          <b>color</b> or <b>style</b> which should also change when hovered
+          over with the mouse.<br/>
+          <h5>Mobile</h5>
+          Keep in mind that a large amount of web traffic comes from mobile
+          devices that don't have a mouse, so clickable items need to be
+          identifiable <i>without the ability to hover</i>.
         </p>
+        <div class="card">
+          <div class="card-header">
+            <a href="#clickable-content" data-toggle="collapse">Clickable Examples</a>
+          </div>
+          <div class="collapse show" id="clickable-content">
+            <div class="card-body">
+              <button class="btn btn-secondary clickable">Submit</button>
+              <a class="clickable" href="#">Book a trip!</a>
+            </div>
+          </div>
+        </div>
         <h3>Reduce noise</h3>
+        <p>
+        </p>
         <h3>Highlight key terms</h3>
         <div class="card bg-dmmt text-white mb-4">
           <div class="card-body">
@@ -250,4 +271,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $(".clickable").click(function () {
+      alert("Yes you clicked me!")
+      return false
+    })
+  })
+  </script>
 </html>
