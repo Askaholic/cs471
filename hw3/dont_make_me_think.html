@@ -5,45 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Don't Make Me Think!</title>
+    <style>
+      html, body {
+        width: 100%;
+        background-color: #7f181b;
+      }
+      .card-full {
+        height: 100%;
+      }
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .bg-dmmt {
+        background-color: #7f181b !important;
+      }
+      .colored-inverse {
+        background-color: #ffffff;
+        color: #7f181b;
+      }
+      .content-wrapper {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .water-glass {
+        display: -ms-flexbox;
+        display: flex;
+        overflow: hidden;
+        width: 2em;
+        height: 10em;
+        border-radius: .25rem;
+        line-height: 1rem;
+      }
+      .water-level {
+        transition: height .6s ease;
+        width: 100%;
+        background-color: #e9ecef !important;
+      }
+    </style>
   </head>
   <body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-dmmt">
+      <button class="navbar-toggler navbar-toggler-right colored-inverse" type="button" data-toggle="collapse" data-target="#navbar-content">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img src="images/dmmt-logo.png" width="30px" height="35px"/>
+      </a>
+      <div class="collapse navbar-collapse" id="navbar-content">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Design <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Usability Testing</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search">
+            <span class="input-group-btn">
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </nav>
     <div class="container-fluid">
-      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-content">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <img src="" width="30" height="30" alt=""/>BRAND
-        </a>
-        <div class="collapse navbar-collapse" id="navbar-content">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+      <div class="content-wrapper">
+        <h1>Don't Make Me Think!</h1>
+        <ul><li>A summary by Rohan Weeden</li></ul>
+        <h3>General Web Design Best Practices</h3>
+        <div class="card bg-dmmt text-white mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Design for scanning</h3>
+          </div>
+          <div class="card-footer bg-light text-dark">
+            <p></p>
+          </div>
         </div>
-      </nav>
-      <h1>Don't Make Me Think!</h1>
-      <h3>General Web Design Best Practices</h3>
-      <ul>
-        <li>Design for scanning</li>
-        <li>Omit needless words</li>
-        <li>Index Page</li>
-        <li>Navigation</li>
-        <li>Goodwill</li>
-      </ul>
-      <h3>Usability Testing</h3>
-      <ul>
-        <li>Keep it simple</li>
-      </ul>
-      <h3>Designing for Mobile</h3>
+        <div class="card bg-dmmt text-white mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Omit needless words</h3>
+          </div>
+          <div class="card-footer bg-light text-dark">
+            <p>Yep...</p>
+          </div>
+        </div>
+        <div class="card bg-dmmt text-white mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Index page</h3>
+          </div>
+          <div class="card-footer bg-light text-dark">
+            <p></p>
+          </div>
+        </div>
+        <div class="card bg-dmmt text-white mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Navigation</h3>
+          </div>
+          <div class="card-footer bg-light text-dark">
+            <p></p>
+          </div>
+        </div>
+        <div class="card bg-dmmt text-white mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Goodwill</h3>
+            <p class="card-text">The user should enjoy navigating your site.
+              Here are some examples of things that will affect a user's
+              goodwill.</p>
+
+            <div class="row row-eq-height text-dark">
+              <div class="col-sm-2">
+                <div class="card card-full">
+                  <div class="card-body">
+                      <div class="water-glass bg-success center">
+                        <div id="goodwill-bar" class="water-level" style="height: 75%">
+                        </div>
+                      </div>
+                      <div class="text-center" style="font-size: 30px">
+                        <i id="goodwill-face" class="fa fa-smile-o"></i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="card card-full">
+                      <div class="card-body">
+                        <h5 class="card-title">Increase</h5>
+                        <ul>
+                          <li class="gw-inc">Well organized</li>
+                          <li class="gw-inc">Main tasks are obvious</li>
+                          <li class="gw-inc">Prices, fees clearly listed</li>
+                          <li class="gw-inc">Doing extra work so I don't have to</li>
+                          <li class="gw-inc">Put effort into it</li>
+                          <li class="gw-inc">Relevant FAQ</li>
+                          <li class="gw-inc">Printer friendly pages</li>
+                          <li class="gw-inc">Easy to recover from errors</li>
+                          <li class="gw-inc">When in doubt, apologize</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card card-full">
+                      <div class="card-body">
+                        <h5 class="card-title">Decrease</h5>
+                          <ul>
+                            <li class="gw-dec">Hiding information</li>
+                            <li class="gw-dec">Not auto-formatting input data</li>
+                            <li class="gw-dec">Asking for personal info</li>
+                            <li class="gw-dec">Faux sincerity</li>
+                            <li class="gw-dec">Excessive marketing</li>
+                            <li class="gw-dec">Amature looks</li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer bg-light text-dark">
+            <p>
+            </p>
+          </div>
+        </div>
+        <div class="card bg-dmmt text-white mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Mindless Choices</h3>
+            <p class="card-text"> Pretend that you are playing 20 questions
+              with the user</p>
+            <a href="#" class="btn btn-danger">Animal</a>
+            <a href="#" class="btn btn-success">Vegetable</a>
+            <a href="#" class="btn btn-secondary">Mineral</a>
+          </div>
+          <div class="card-footer bg-light text-dark">
+            <p>Information should be grouped in a way that is as unambiguous as
+              possible. This makes choices when clicking through a menu very
+              straight forward.
+            </p>
+          </div>
+        </div>
+        <h3>Usability Testing</h3>
+        <div class="card bg-dmmt text-white">
+          <div class="card-body">
+            <h3 class="card-title">Keep it simple</h3>
+          </div>
+          <div class="card-footer bg-light text-dark">
+            <p></p>
+          </div>
+        </div>
+        <h3>Designing for Mobile</h3>
+      </div>
     </div>
   </body>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
