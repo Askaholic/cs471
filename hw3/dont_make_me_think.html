@@ -10,6 +10,9 @@
         width: 100%;
         background-color: #7f181b;
       }
+      p, h1, h2, h3, h4, h5, h6 {
+        page-break-inside: avoid;
+      }
       .card-full {
         height: 100%;
       }
@@ -86,9 +89,7 @@
     </nav>
     <div class="container-fluid">
       <div class="content-wrapper">
-        <h1>Don't Make Me Think!</h1>
-        <ul><li>A summary by Rohan Weeden</li></ul>
-        <div class="card bg-dmmt text-white mb-4">
+        <div class="card bg-dmmt text-white mb-4 mt-2">
           <div class="card-body">
             <h3 class="card-title">Web Design Best Practices</h3>
           </div>
@@ -257,7 +258,7 @@
             </p>
           </div>
         </div>
-        <div class="card bg-dmmt text-white mb-4">
+        <div class="card bg-dmmt text-white mb-4" style="page-break-inside: avoid;">
           <div class="card-body">
             <h3 class="card-title">Mindless Choices</h3>
           </div>
@@ -320,8 +321,16 @@
               </ul>
             <h3>Deciding What to Fix</h3>
             <p>
-
+              It is important to only pick a small number of problems to work on,
+              as changing the design for these problems can affect the workflow
+              of the whole site.
             </p>
+            <ul>
+              <li>Make a list</li>
+              <li>Choose 10 most serious problems</li>
+              <li>Rate them from 1-10</li>
+              <li>Create an ordered list</li>
+            </ul>
           </div>
         </div>
         <div class="card bg-dmmt text-white mb-4">
