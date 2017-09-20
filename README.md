@@ -1,2 +1,2 @@
-# cs471-whitepaper
-Whitepaper on web credit card payment options
+# cs471
+A location for all of my assignments in CS 471
