@@ -166,11 +166,9 @@
             </div>
             <h3>Reduce noise</h3>
             <p>
-              It is inevitable that web pages will end up with a lot of noise,
-              especially for larger entities with many different departments all
-              wanting to get their share of the site. But at some point there
-              may be too many distractions for users to be able to read,
-              and some will get frustrated and leave the page.
+              It is inevitable that web pages will end up with a lot of noise and
+              at some point there may be too many distractions for users to be
+              able to read.
             </p>
             <h5>General noise levels</h5>
             <ul>
@@ -224,33 +222,15 @@
                   <div class="card-body">
                     <h5 class="card-title">Increase</h5>
                     <ul>
-                      <li class="gw-inc">
-                        <input type="checkbox" checked="checked"/>
-                        Well organized</li>
-                      <li class="gw-inc">
-                        <input type="checkbox" checked="checked"/>
-                        Main tasks are obvious</li>
-                      <li class="gw-inc">
-                        <input type="checkbox" checked="checked"/>
-                        Prices, fees clearly listed</li>
-                      <li class="gw-inc">
-                        <input type="checkbox" checked="checked"/>
-                        Doing extra work so I don't have to</li>
-                      <li class="gw-inc">
-                        <input type="checkbox"/>
-                        Put effort into it</li>
-                      <li class="gw-inc">
-                        <input type="checkbox"/>
-                        Relevant FAQ</li>
-                      <li class="gw-inc">
-                        <input type="checkbox"/>
-                        Printer friendly pages</li>
-                      <li class="gw-inc">
-                        <input type="checkbox"/>
-                        Easy to recover from errors</li>
-                      <li class="gw-inc">
-                        <input type="checkbox"/>
-                        When in doubt, apologize</li>
+                      <li class="gw-inc">Well organized</li>
+                      <li class="gw-inc">Main tasks are obvious</li>
+                      <li class="gw-inc">Prices, fees clearly listed</li>
+                      <li class="gw-inc">Doing extra work so I don't have to</li>
+                      <li class="gw-inc">Put effort into it</li>
+                      <li class="gw-inc">Relevant FAQ</li>
+                      <li class="gw-inc">Printer friendly pages</li>
+                      <li class="gw-inc">Easy to recover from errors</li>
+                      <li class="gw-inc">When in doubt, apologize</li>
                     </ul>
                   </div>
                 </div>
@@ -260,24 +240,12 @@
                   <div class="card-body">
                     <h5 class="card-title">Decrease</h5>
                       <ul>
-                        <li class="gw-dec">
-                          <input type="checkbox" checked="checked"/>
-                          Hiding information</li>
-                        <li class="gw-dec">
-                          <input type="checkbox" checked="checked"/>
-                          Not auto-formatting input data</li>
-                        <li class="gw-dec">
-                          <input type="checkbox"/>
-                          Asking for personal info</li>
-                        <li class="gw-dec">
-                          <input type="checkbox"/>
-                          Faux sincerity</li>
-                        <li class="gw-dec">
-                          <input type="checkbox"/>
-                          Excessive marketing</li>
-                        <li class="gw-dec">
-                          <input type="checkbox"/>
-                          Amature looks</li>
+                        <li class="gw-dec">Hiding information</li>
+                        <li class="gw-dec">Not auto-formatting input data</li>
+                        <li class="gw-dec">Asking for personal info</li>
+                        <li class="gw-dec">Faux sincerity</li>
+                        <li class="gw-dec">Excessive marketing</li>
+                        <li class="gw-dec">Amature looks</li>
                       </ul>
                   </div>
                 </div>
@@ -377,8 +345,7 @@
             <h3>Mobile First</h3>
             <p>The idea of mobile first design is not to worry about the desktop
             site until the mobile one is done. This way the most important parts
-            of the site are built into it's core and users browsing on their small
-            devices won't have problems finding it.</p>
+            of the site are built into it's core.</p>
             <div class="row">
               <div class="col-md-4">
                 <h5>Typical problems</h5>
@@ -394,6 +361,9 @@
                   easy for developers to use.
                 </p>
               </div>
+              <p>
+
+              </p>
             </div>
             <h5>
           </div>
@@ -419,14 +389,10 @@
       addGoodwill(-10, this)
     })
     function addGoodwill(amount, elem) {
-        var box = $(elem).children(":checkbox")
-        prevVal = box.prop("checked")
-        box.prop("checked", !prevVal);
-        if (prevVal === false) bar_percent -= amount;
-        else bar_percent += amount;
-        if (bar_percent > 100) bar_percent = 100;
-        if (bar_percent < 0) bar_percent = 0;
-        $("#goodwill-bar").css("height", bar_percent + "%")
+      bar_percent -= amount;
+      if (bar_percent > 100) bar_percent = 100;
+      if (bar_percent < 0) bar_percent = 0;
+      $("#goodwill-bar").css("height", bar_percent + "%")
     }
   })
   </script>
