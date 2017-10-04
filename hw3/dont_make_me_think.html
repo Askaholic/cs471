@@ -32,6 +32,9 @@
         margin-left: auto;
         margin-right: auto;
       }
+      .gw-inc, .gw-dec {
+        cursor: pointer;
+      }
       .water-glass {
         display: -ms-flexbox;
         display: flex;
@@ -49,7 +52,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm navbar-light bg-dmmt">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dmmt">
       <button class="navbar-toggler navbar-toggler-right colored-inverse" type="button" data-toggle="collapse" data-target="#navbar-content">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -221,15 +224,33 @@
                   <div class="card-body">
                     <h5 class="card-title">Increase</h5>
                     <ul>
-                      <li class="gw-inc">Well organized</li>
-                      <li class="gw-inc">Main tasks are obvious</li>
-                      <li class="gw-inc">Prices, fees clearly listed</li>
-                      <li class="gw-inc">Doing extra work so I don't have to</li>
-                      <li class="gw-inc">Put effort into it</li>
-                      <li class="gw-inc">Relevant FAQ</li>
-                      <li class="gw-inc">Printer friendly pages</li>
-                      <li class="gw-inc">Easy to recover from errors</li>
-                      <li class="gw-inc">When in doubt, apologize</li>
+                      <li class="gw-inc">
+                        <input type="checkbox" checked="checked"/>
+                        Well organized</li>
+                      <li class="gw-inc">
+                        <input type="checkbox" checked="checked"/>
+                        Main tasks are obvious</li>
+                      <li class="gw-inc">
+                        <input type="checkbox" checked="checked"/>
+                        Prices, fees clearly listed</li>
+                      <li class="gw-inc">
+                        <input type="checkbox" checked="checked"/>
+                        Doing extra work so I don't have to</li>
+                      <li class="gw-inc">
+                        <input type="checkbox"/>
+                        Put effort into it</li>
+                      <li class="gw-inc">
+                        <input type="checkbox"/>
+                        Relevant FAQ</li>
+                      <li class="gw-inc">
+                        <input type="checkbox"/>
+                        Printer friendly pages</li>
+                      <li class="gw-inc">
+                        <input type="checkbox"/>
+                        Easy to recover from errors</li>
+                      <li class="gw-inc">
+                        <input type="checkbox"/>
+                        When in doubt, apologize</li>
                     </ul>
                   </div>
                 </div>
@@ -239,12 +260,24 @@
                   <div class="card-body">
                     <h5 class="card-title">Decrease</h5>
                       <ul>
-                        <li class="gw-dec">Hiding information</li>
-                        <li class="gw-dec">Not auto-formatting input data</li>
-                        <li class="gw-dec">Asking for personal info</li>
-                        <li class="gw-dec">Faux sincerity</li>
-                        <li class="gw-dec">Excessive marketing</li>
-                        <li class="gw-dec">Amature looks</li>
+                        <li class="gw-dec">
+                          <input type="checkbox" checked="checked"/>
+                          Hiding information</li>
+                        <li class="gw-dec">
+                          <input type="checkbox" checked="checked"/>
+                          Not auto-formatting input data</li>
+                        <li class="gw-dec">
+                          <input type="checkbox"/>
+                          Asking for personal info</li>
+                        <li class="gw-dec">
+                          <input type="checkbox"/>
+                          Faux sincerity</li>
+                        <li class="gw-dec">
+                          <input type="checkbox"/>
+                          Excessive marketing</li>
+                        <li class="gw-dec">
+                          <input type="checkbox"/>
+                          Amature looks</li>
                       </ul>
                   </div>
                 </div>
@@ -333,7 +366,7 @@
             </ul>
           </div>
         </div>
-        <div class="card bg-dmmt text-white mb-4">
+        <div class="card bg-dmmt text-white">
           <div class="card-body">
             <h3 class="card-title">Designing for Mobile</h3>
           </div>
@@ -373,10 +406,28 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   <script>
   $(document).ready(function() {
+    var bar_percent = 75;
+
     $(".clickable").click(function () {
       alert("Yes you clicked me!")
       return false
+    });
+    $(".gw-inc").click(function() {
+      addGoodwill(10, this)
     })
+    $(".gw-dec").click(function() {
+      addGoodwill(-10, this)
+    })
+    function addGoodwill(amount, elem) {
+        var box = $(elem).children(":checkbox")
+        prevVal = box.prop("checked")
+        box.prop("checked", !prevVal);
+        if (prevVal === false) bar_percent -= amount;
+        else bar_percent += amount;
+        if (bar_percent > 100) bar_percent = 100;
+        if (bar_percent < 0) bar_percent = 0;
+        $("#goodwill-bar").css("height", bar_percent + "%")
+    }
   })
   </script>
 </html>
