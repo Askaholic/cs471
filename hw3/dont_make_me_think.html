@@ -32,6 +32,9 @@
         margin-left: auto;
         margin-right: auto;
       }
+      .gw-inc, .gw-dec {
+        cursor: pointer;
+      }
       .water-glass {
         display: -ms-flexbox;
         display: flex;
@@ -49,7 +52,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm navbar-light bg-dmmt">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dmmt">
       <button class="navbar-toggler navbar-toggler-right colored-inverse" type="button" data-toggle="collapse" data-target="#navbar-content">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -118,7 +121,7 @@
             </p>
             <div class="row">
               <div class="col-md-6">
-                <img class="center" src="images/above-fold-newspaper.jpeg" height="300px" width="300px"/>
+                <img class="center img-fluid" src="images/above-fold-newspaper.jpeg" height="300px" width="300px"/>
               </div>
               <div class="col-md-6">
                 <h4>Headings</h4>
@@ -163,11 +166,9 @@
             </div>
             <h3>Reduce noise</h3>
             <p>
-              It is inevitable that web pages will end up with a lot of noise,
-              especially for larger entities with many different departments all
-              wanting to get their share of the site. But at some point there
-              may be too many distractions for users to be able to read,
-              and some will get frustrated and leave the page.
+              It is inevitable that web pages will end up with a lot of noise and
+              at some point there may be too many distractions for users to be
+              able to read.
             </p>
             <h5>General noise levels</h5>
             <ul>
@@ -183,7 +184,7 @@
             <b>highlighting</b> those key words in a different color, font, or size.</p>
           </div>
         </div>
-        <div class="card bg-dmmt text-white mb-4">
+        <div class="card bg-dmmt text-white mb-4" style="page-break-inside: avoid;">
           <div class="card-body">
             <h3 class="card-title">Omit needless words</h3>
           </div>
@@ -323,7 +324,8 @@
             <p>
               It is important to only pick a small number of problems to work on,
               as changing the design for these problems can affect the workflow
-              of the whole site.
+              of the whole site. Every viewer should write down the <i>three most
+              serious problems</i> that they saw for each participant.
             </p>
             <ul>
               <li>Make a list</li>
@@ -333,7 +335,7 @@
             </ul>
           </div>
         </div>
-        <div class="card bg-dmmt text-white mb-4">
+        <div class="card bg-dmmt text-white">
           <div class="card-body">
             <h3 class="card-title">Designing for Mobile</h3>
           </div>
@@ -344,8 +346,7 @@
             <h3>Mobile First</h3>
             <p>The idea of mobile first design is not to worry about the desktop
             site until the mobile one is done. This way the most important parts
-            of the site are built into it's core and users browsing on their small
-            devices won't have problems finding it.</p>
+            of the site are built into it's core.</p>
             <div class="row">
               <div class="col-md-4">
                 <h5>Typical problems</h5>
@@ -358,9 +359,17 @@
                 <p>Luckily Twitter already did all of the work and released their
                   css code called <b>Bootstrap</b> to the public. Bootstrap can
                   be used to make responsive mobile first websites and is extremely
-                  easy for developers to use.
+                  easy for developers to use. Additionally, it also implements many
+                  of the <b>common conventions</b> a user will run into on the web.
                 </p>
               </div>
+              <p>
+                Using Bootstrap makes it easier to create any website, even if it
+                is just meant for a desktop site (with the added bonus of it
+                looking nice on mobile too). It mainly consists of predefined
+                CSS <b>classes</b> that developers can add to parts of their page.
+
+              </p>
             </div>
             <h5>
           </div>
@@ -373,10 +382,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   <script>
   $(document).ready(function() {
+    var bar_percent = 75;
+
     $(".clickable").click(function () {
       alert("Yes you clicked me!")
       return false
+    });
+    $(".gw-inc").click(function() {
+      addGoodwill(10, this)
     })
+    $(".gw-dec").click(function() {
+      addGoodwill(-10, this)
+    })
+    function addGoodwill(amount, elem) {
+      bar_percent -= amount;
+      if (bar_percent > 100) bar_percent = 100;
+      if (bar_percent < 0) bar_percent = 0;
+      $("#goodwill-bar").css("height", bar_percent + "%")
+    }
   })
   </script>
 </html>

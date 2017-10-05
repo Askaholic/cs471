@@ -122,23 +122,19 @@
   <body>
     <div class="centered-wrapper">
       <div class="container-fluid">
-        <div>
-          <p>
-            Rohan Weeden<br/>
-            September 13, 2017<br/>
-            Whitepaper
-          </p>
-        </div>
-        <h1>Credit Card Processing Options for a Small Webstore</h1>
+        <h1>Introduction</h1>
         <hr/>
         <p>
-          Allowing customers to pay online is a much trickier problem than it may seem at first. You will need:
+          Taking credit card payments online presents a number of challenges. Any store that accepts credit cards will need:
           <ul>
             <li>Merchant bank account</li>
             <li>Gateway for transactions</li>
             <li>Full PCI Compliance</li>
           </ul>
-          When starting a business it is often most cost effective to pay for a service like PayPal to do the processing for you. But what other options are there? Keep reading to find out...
+          There are basically two options for processing card payments. <b> Do it yourself</b> by becoming fully PCI compliant and initiating the transactions internally, or use a <b>third party service</b> which already has the necessary infrastructure in place.
+        </p>
+        <p>
+          Doing it yourself has the advantage of brining in the largest amount of revenue, however it also has the highest set up <b>time</b> and <b>cost</b>.
         </p>
         <hr/>
         <h3>PCI Compliance</h3>
@@ -204,9 +200,16 @@
             </li>
           </ol>
         </ul>
+        <p>
+          Becoming compliant can be a big undertaking, however, it is easiest to do early on when your company is still building up. Even if you choose not to do credit card processing yourself right off the bat, it may be worth <b>integrating</b> some of the PCI requirements <i>into your company's policy</i>.
+        </p>
+        <hr/>
+        <h3>Third Party Gateway Options</h3>
+        <p>
+          Regardless of whether or not you decide to become PCI compliant, you will want to start selling products as soon as possible. Therefore, you should almost certainly use a third party service while your company is putting other infrastructure in place. Here are some of the most viable options.
+        </p>
+        <hr style="margin-top: 0"/>
         <div title="Paypal Pros/Cons">
-          <h3>Third Party Gateway Options</h3>
-          <hr/>
           <div class="logo paypal-logo"></div>
           <div class="row">
             <div class="col-sm-6">
@@ -229,11 +232,11 @@
             </div>
           </div>
         </div>
-        <hr/>
+        <hr style="margin-bottom: 0;margin-top: 0"/>
         <div title="Stripe Pros/Cons">
+          <div class="logo stripe-logo"></div>
           <div class="row">
             <div class="col-sm-6">
-              <div class="logo stripe-logo"></div>
               Pros:
               <ul>
                 <li>All features included</li>
@@ -252,11 +255,11 @@
             </div>
           </div>
         </div>
-        <hr/>
+        <hr style="margin-bottom: 0;margin-top: 0"/>
         <div title="Braintree Pros/Cons">
+          <div class="logo braintree-logo"></div>
           <div class="row">
             <div class="col-sm-6">
-              <div class="logo braintree-logo"></div>
               <label>Pros:</label>
               <ul>
                 <li>Supports Apple Pay, Android Pay, PayPal, and Venmo</li>
@@ -274,11 +277,11 @@
             </div>
           </div>
         </div>
-        <hr/>
+        <hr style="margin-bottom: 0;margin-top: 0"/>
         <div title="Square Pros/Cons">
+          <div class="logo square-logo"></div>
           <div class="row">
             <div class="col-sm-6">
-              <div class="logo square-logo"></div>
               <label>Pros:</label>
               <ul>
                 <li>Great support for in-store transactions</li>
@@ -296,7 +299,7 @@
           </div>
         </div>
         <p>
-          While PayPal has been trusted in this industry for many years, it has been somewhat slow to adapt to modern trends. There are still a lot of fees for specific types of transactions, and you need to purchase a premium subscription to unlock all of the features. PayPal has also been behind in its API and API Documentation, and has been scrambling to catch up with Stripe. Here are some of the details:
+          While PayPal has been trusted in this industry for many years, it has been somewhat slow to adapt to modern trends. There are still a lot of fees for specific types of transactions, and you need to purchase a premium subscription to unlock all of the features. PayPal has also been behind in its API and API Documentation, and has been scrambling to catch up with Stripe. Here are the details:
         </p>
         <table class="table table-striped" style="page-break-inside: auto">
           <tr>
@@ -505,22 +508,22 @@
           <tr>
             <td>
               <p>
-                Will save you a lot of money if you process mostly microtransactions
+              Choose PayPal if you process mostly microtransactions
               </p>
             </td>
             <td>
               <p>
-                Fewer fees and a superior API making website checkout integration easy
+                Choose Stripe if you want fewer fees, and easy website integration
               </p>
             </td>
           </tr>
         </table>
 
-        <h5>Large Business ($1M/year)</h5>
+        <h5>Larger Business ($1M/year)</h5>
         <p style="page-break-inside: avoid">
-          For a large business it may be worth considering the cost of becoming PCI compliant and everything in-house. Emperical evidence suggests that for a business of this size it could cost $80,000 to $100,000 to become compliant. However, this is an issue for another whitepaper.
+          For a larger business it may be worth considering the cost of becoming PCI compliant and doing everything in-house. Emperical data suggests that for a business of this size it could cost between $80,000 to $100,000 to become compliant. However, this is an issue for another whitepaper.
           <br/>
-          The best option would still be the same as for a small business.
+          The best option would be to make the same choice as for a small business.
         </p>
         <hr/>
         <h3>Sources</h3>
